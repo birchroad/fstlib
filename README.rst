@@ -1,6 +1,12 @@
 FSTLib
 ======
-Library for communicating with Festo PLC Controllers that support the Easy-IP protocol
+Library for communicating with Festo PLC Controllers that support the 
+Easy-IP protocol.
+Under the src folder you will find different implementations for different
+languages like python, ruby and arduino/c++.
+The functionality implemented will differ between languages but ip packet
+packing and unpacking is a common thing.
+
 
 
 ===============
