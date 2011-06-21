@@ -39,7 +39,7 @@ import logging
 from twisted.internet import protocol
 from twisted.python import log
 
-
+all = ('TwistedEasyS')
 
 
 class LogProxy(object):
@@ -51,9 +51,10 @@ class TwistedEasyS(protocol.DatagramProtocol):
     Warning!!!
     This class is experimental and not tested
     """
-    def __init__(self):
+    def __init__(self, callback=None):
         #self.log = logging.getLogger('easyip.EasyS')
         self.log=LogProxy()
+        self.callback=callback
             
     def startProtocol(self):
         pass
@@ -64,9 +65,12 @@ class TwistedEasyS(protocol.DatagramProtocol):
             
     def datagramReceived(self, datagram, (host,port)):
         packet = easyip.Packet(datagram)
+        print "got packet from %s" % host
         response = self.react(packet)
         if response:
             self.sendMsg(response, (host, port))
+        if self.callback:
+            self.callback(packet, (host, port))
 
     def react(self, packet):
         response = easyip.Packet();

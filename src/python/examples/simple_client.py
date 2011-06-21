@@ -6,7 +6,7 @@ from fstlib import easyip
 
 # Set the socket parameters
 host = "localhost"
-port = 1000 + easyip.EASYIP_PORT
+port = 1024 + easyip.EASYIP_PORT
 buf = 1024
 addr = (host,port)
 
@@ -16,7 +16,7 @@ class SimpleClient(object):
         self.UDPSock = socket(AF_INET,SOCK_DGRAM)
         self.UDPSock.bind(('0.0.0.0', 0))
         self.counter = 0
-        self.addr = (host,easyip.EASYIP_PORT)
+        self.addr = (host,port or easyip.EASYIP_PORT)
         
     def send_packet(self, packet):
         self.UDPSock.settimeout(5)
